@@ -45,26 +45,23 @@ This application follows a **3-tier architecture** with complete separation of c
 
 ```
 todo-app/
-├── frontend/                # Tier 1: Frontend Layer
-│   ├── README.md            # Detailed frontend docs
+├── frontend/                 # Tier 1: Frontend Layer
 │   ├── Dockerfile           # Multi-stage build with Node + Nginx
 │   ├── package.json         # React dependencies
 │   ├── vite.config.js       # Vite bundler configuration
 │   ├── nginx.conf           # Nginx server configuration
-│   └── src/
-│       ├── index.html       # HTML entry point
-│       ├── main.jsx         # React entry point
-│       ├── App.jsx          # Main React component
-│       └── styles.css       # Application styles
+│   ├── index.html           # HTML entry point
+│   ├── main.jsx             # React entry point
+│   ├── App.jsx              # Main React component
+│   └── styles.css           # Application styles
 │
-├── backend/                 # Tier 2: Backend Layer
-│   ├── README.md            # Detailed backend docs
+├── backend/                  # Tier 2: Backend Layer
 │   ├── Dockerfile           # Node.js Alpine container
 │   ├── package.json         # Express, Mongoose dependencies
 │   ├── server.js            # Express API server
 │   └── .env                 # Environment variables
 │
-├── database/                # Tier 3: Database Layer
+├── database/                 # Tier 3: Database Layer
 │   ├── init-db.js           # MongoDB initialization script
 │   ├── backup.sh            # Database backup script
 │   ├── restore.sh           # Database restore script
@@ -78,6 +75,7 @@ todo-app/
 ## ✨ Features
 
 ### 🎨 Frontend (React + Nginx)
+
 - ✅ Modern, responsive UI with gradient design
 - ✅ Real-time task statistics dashboard
 - ✅ Filter tasks by All/Active/Completed
@@ -86,6 +84,7 @@ todo-app/
 - ✅ Nginx reverse proxy for API routing
 
 ### 🚀 Backend (Node.js + Express)
+
 - ✅ RESTful API with full CRUD operations
 - ✅ MongoDB integration with Mongoose ODM
 - ✅ Input validation and error handling
@@ -94,6 +93,7 @@ todo-app/
 - ✅ Environment-based configuration
 
 ### 💾 Database (MongoDB)
+
 - ✅ Persistent data storage with Docker volumes
 - ✅ Automatic initialization with sample data
 - ✅ Performance indexes for optimization
@@ -103,6 +103,7 @@ todo-app/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Docker (20.10+)
 - Docker Compose (2.0+)
 - Git
@@ -110,22 +111,26 @@ todo-app/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd todo-app
    ```
 
 2. **Build and start all containers**
+
    ```bash
    docker-compose up --build
    ```
 
 3. **Access the application**
+
    - **Frontend**: http://localhost
    - **Backend API**: http://localhost:5000/api
    - **Health Check**: http://localhost:5000/api/health
 
 4. **Stop the application**
+
    ```bash
    docker-compose down
    ```
@@ -140,6 +145,7 @@ todo-app/
 ### Run in Development Mode
 
 **Frontend Development:**
+
 ```bash
 cd frontend
 npm install
@@ -148,6 +154,7 @@ npm run dev
 ```
 
 **Backend Development:**
+
 ```bash
 cd backend
 npm install
@@ -158,29 +165,32 @@ npm run dev
 ### Environment Variables
 
 **Backend (.env):**
+
 ```env
 PORT=5000
 MONGODB_URI=mongodb://database:27017/todoapp
 ```
 
 **Frontend:**
+
 ```env
 VITE_API_URL=http://localhost/api
 ```
 
 ## 📡 API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check endpoint |
-| GET | `/api/todos` | Get all todos |
-| POST | `/api/todos` | Create a new todo |
-| PUT | `/api/todos/:id` | Update a todo |
-| DELETE | `/api/todos/:id` | Delete a todo |
+| Method | Endpoint         | Description           |
+| ------ | ---------------- | --------------------- |
+| GET    | `/api/health`    | Health check endpoint |
+| GET    | `/api/todos`     | Get all todos         |
+| POST   | `/api/todos`     | Create a new todo     |
+| PUT    | `/api/todos/:id` | Update a todo         |
+| DELETE | `/api/todos/:id` | Delete a todo         |
 
 ### Example API Requests
 
 **Create a Todo:**
+
 ```bash
 curl -X POST http://localhost:5000/api/todos \
   -H "Content-Type: application/json" \
@@ -188,11 +198,13 @@ curl -X POST http://localhost:5000/api/todos \
 ```
 
 **Get All Todos:**
+
 ```bash
 curl http://localhost:5000/api/todos
 ```
 
 **Update a Todo:**
+
 ```bash
 curl -X PUT http://localhost:5000/api/todos/<todo-id> \
   -H "Content-Type: application/json" \
@@ -200,6 +212,7 @@ curl -X PUT http://localhost:5000/api/todos/<todo-id> \
 ```
 
 **Delete a Todo:**
+
 ```bash
 curl -X DELETE http://localhost:5000/api/todos/<todo-id>
 ```
@@ -371,6 +384,7 @@ curl -X DELETE http://localhost:5000/api/todos/<id>
 ### Common Issues
 
 **Port already in use:**
+
 ```bash
 # Check what's using the port
 sudo lsof -i :80
@@ -381,6 +395,7 @@ sudo lsof -i :27017
 ```
 
 **Container fails to start:**
+
 ```bash
 # Check logs
 docker-compose logs <service-name>
@@ -391,6 +406,7 @@ docker-compose up -d
 ```
 
 **Database connection fails:**
+
 ```bash
 # Check if database is running
 docker-compose ps database
@@ -403,6 +419,7 @@ docker-compose restart database
 ```
 
 **Frontend can't connect to backend:**
+
 ```bash
 # Check nginx configuration
 docker exec -it todo-frontend cat /etc/nginx/conf.d/default.conf
@@ -412,6 +429,7 @@ curl http://localhost:5000/api/health
 ```
 
 **Data not persisting:**
+
 ```bash
 # Check volume exists
 docker volume ls | grep todo-app-data
@@ -453,7 +471,6 @@ docker-compose down -v  # ❌ Removes data
 ```yaml
 # Scale backend instances
 docker-compose up -d --scale backend=3
-
 # Add load balancer (nginx/traefik)
 # Configure sticky sessions for WebSocket support
 ```
@@ -466,10 +483,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: "2"
           memory: 2G
         reservations:
-          cpus: '1'
+          cpus: "1"
           memory: 1G
 ```
 
@@ -507,6 +524,4 @@ Created for DevOps demonstrations and learning purposes.
 
 ---
 
-
 **⭐ Star this repository if you found it helpful!**
-

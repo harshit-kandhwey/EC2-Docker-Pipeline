@@ -14,12 +14,11 @@ frontend/
 ├── package.json         # Dependencies and scripts
 ├── vite.config.js       # Vite bundler configuration
 ├── nginx.conf           # Nginx server configuration
-├── src/
-│   ├── index.html      # HTML entry point
-│   ├── main.jsx        # React application entry
-│   ├── App.jsx         # Main React component
-│   └── styles.css      # Application styles
-└── README.md           # This file
+├── index.html           # HTML entry point
+├── main.jsx             # React application entry
+├── App.jsx              # Main React component
+├── styles.css           # Application styles
+└── README.md            # This file
 ```
 
 ## 🏗️ Architecture
@@ -48,6 +47,7 @@ Stage 2: Production
 ## ✨ Features
 
 ### User Interface
+
 - ✅ Modern gradient design with purple theme
 - ✅ Fully responsive layout
 - ✅ Smooth animations and transitions
@@ -58,6 +58,7 @@ Stage 2: Production
 - ✅ Loading indicators
 
 ### Technical Features
+
 - ✅ React 18 with Hooks (useState, useEffect)
 - ✅ Vite for fast builds and HMR
 - ✅ Production-optimized build
@@ -69,26 +70,31 @@ Stage 2: Production
 ## 🚀 Development Setup
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
 ### Local Development
 
 1. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Set up environment variables**
+
    ```bash
    # Create .env file
    echo "VITE_API_URL=http://localhost:5000/api" > .env
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
+
    Access at: http://localhost:3000
 
 4. **Build for production**
@@ -127,15 +133,18 @@ docker-compose up -d frontend
 ### Docker Configuration
 
 **Dockerfile Stages:**
+
 1. **Build Stage**: Uses Node.js to build React app
 2. **Production Stage**: Uses Nginx to serve static files
 
 **Environment Variables:**
+
 - `VITE_API_URL`: Backend API URL (default: http://localhost/api)
 
 ## 📦 Dependencies
 
 ### Production Dependencies
+
 ```json
 {
   "react": "^18.2.0",
@@ -144,6 +153,7 @@ docker-compose up -d frontend
 ```
 
 ### Development Dependencies
+
 ```json
 {
   "@vitejs/plugin-react": "^4.0.0",
@@ -154,19 +164,22 @@ docker-compose up -d frontend
 ## 🔧 Configuration Files
 
 ### vite.config.js
+
 ```javascript
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   server: { port: 3000 },
-  build: { outDir: 'dist' }
+  build: { outDir: "dist" },
 });
 ```
 
 ### nginx.conf
+
 Configures:
+
 - Static file serving from `/usr/share/nginx/html`
 - API reverse proxy to backend at `http://backend:5000`
 - SPA routing support (try_files)
@@ -177,20 +190,23 @@ Configures:
 ### App.jsx
 
 **State Management:**
+
 ```javascript
-const [todos, setTodos] = useState([]);        // All todos
-const [newTodo, setNewTodo] = useState('');    // Input field
-const [filter, setFilter] = useState('all');   // Filter state
+const [todos, setTodos] = useState([]); // All todos
+const [newTodo, setNewTodo] = useState(""); // Input field
+const [filter, setFilter] = useState("all"); // Filter state
 const [loading, setLoading] = useState(false); // Loading state
 ```
 
 **Main Functions:**
+
 - `fetchTodos()` - GET all todos from API
 - `addTodo()` - POST new todo to API
 - `toggleTodo()` - PUT update todo completion status
 - `deleteTodo()` - DELETE todo from API
 
 **Computed Values:**
+
 - `filteredTodos` - Filtered list based on active filter
 - `stats` - Total, active, and completed counts
 
@@ -199,6 +215,7 @@ const [loading, setLoading] = useState(false); // Loading state
 ### Design System
 
 **Colors:**
+
 - Primary Gradient: `#667eea` → `#764ba2`
 - Background: Linear gradient purple theme
 - Text: `#333` (primary), `#666` (secondary), `#999` (muted)
@@ -206,18 +223,21 @@ const [loading, setLoading] = useState(false); // Loading state
 - Borders: `#e0e0e0`, `#f0f0f0`
 
 **Typography:**
+
 - Font Family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 - Header: 2.5rem (40px)
 - Body: 1rem (16px)
 - Small: 0.875rem (14px)
 
 **Spacing:**
+
 - Container max-width: 700px
 - Padding: 20px, 30px
 - Gaps: 10px, 15px
 - Border radius: 8px, 16px
 
 ### CSS Features
+
 - Flexbox layouts
 - CSS Grid for stats
 - Smooth transitions (0.2s, 0.3s)
@@ -231,25 +251,32 @@ const [loading, setLoading] = useState(false); // Loading state
 ### API Endpoint Configuration
 
 ```javascript
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 ```
 
 ### API Calls
 
 **Fetch Todos:**
+
 ```javascript
-GET /api/todos
-Response: [{ _id, text, completed, createdAt }]
+GET / api / todos;
+Response: [{ _id, text, completed, createdAt }];
 ```
 
 **Create Todo:**
+
 ```javascript
-POST /api/todos
-Body: { text: "Task description" }
-Response: { _id, text, completed, createdAt }
+POST / api / todos;
+Body: {
+  text: "Task description";
+}
+Response: {
+  _id, text, completed, createdAt;
+}
 ```
 
 **Update Todo:**
+
 ```javascript
 PUT /api/todos/:id
 Body: { completed: true/false }
@@ -257,6 +284,7 @@ Response: { _id, text, completed, createdAt }
 ```
 
 **Delete Todo:**
+
 ```javascript
 DELETE /api/todos/:id
 Response: { message: "Todo deleted successfully" }
@@ -265,23 +293,27 @@ Response: { message: "Todo deleted successfully" }
 ## 🔍 Features Breakdown
 
 ### Statistics Dashboard
+
 - Displays total, active, and completed task counts
 - Updates in real-time as tasks change
 - Color-coded values for visual clarity
 
 ### Filter System
+
 - **All**: Shows all tasks
 - **Active**: Shows only incomplete tasks
 - **Completed**: Shows only completed tasks
 - Active filter button highlighted
 
 ### Task Management
+
 - Add new tasks via input form
 - Mark tasks complete with checkbox
 - Delete tasks with trash icon
 - Tasks sorted by creation date (newest first)
 
 ### User Experience
+
 - Empty states for each filter view
 - Loading indicator during API calls
 - Smooth animations on interactions
@@ -317,6 +349,7 @@ Response: { message: "Todo deleted successfully" }
 ### Common Issues
 
 **Build fails:**
+
 ```bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
@@ -325,6 +358,7 @@ npm run build
 ```
 
 **API connection fails:**
+
 ```bash
 # Check API URL configuration
 echo $VITE_API_URL
@@ -337,6 +371,7 @@ docker exec -it todo-frontend cat /etc/nginx/conf.d/default.conf
 ```
 
 **Styles not loading:**
+
 ```bash
 # Verify import in main.jsx
 import './styles.css';
@@ -347,6 +382,7 @@ docker-compose up -d --build frontend
 ```
 
 **Port 80 already in use:**
+
 ```bash
 # Check what's using port 80
 sudo lsof -i :80
@@ -359,18 +395,21 @@ ports:
 ## 📈 Performance Optimization
 
 ### Build Optimization
+
 - Tree shaking with Vite
 - Code splitting
 - Minification
 - Gzip compression (via Nginx)
 
 ### Runtime Optimization
+
 - Lazy loading (can be added)
 - Memoization with useMemo (can be added)
 - Virtual scrolling for large lists (can be added)
 - Service Worker for offline support (can be added)
 
 ### Nginx Optimization
+
 ```nginx
 # Can be added to nginx.conf
 gzip on;
@@ -382,12 +421,14 @@ add_header Cache-Control "public, immutable";
 ## 🔐 Security
 
 ### Current Security Features
+
 - Input sanitization via trim()
 - CORS handled by backend
 - XSS protection via React (automatic escaping)
 - No inline scripts
 
 ### Production Recommendations
+
 - Add Content Security Policy headers
 - Implement rate limiting
 - Add CSRF protection
@@ -397,6 +438,7 @@ add_header Cache-Control "public, immutable";
 ## 🚀 Deployment
 
 ### Production Checklist
+
 - [ ] Set production API URL
 - [ ] Enable Nginx gzip compression
 - [ ] Configure caching headers
@@ -407,6 +449,7 @@ add_header Cache-Control "public, immutable";
 - [ ] Implement analytics
 
 ### Environment Variables
+
 ```bash
 # Development
 VITE_API_URL=http://localhost:5000/api
@@ -425,6 +468,7 @@ VITE_API_URL=https://api.yourdomain.com/api
 ## 🤝 Contributing
 
 When contributing to the frontend:
+
 1. Follow React best practices
 2. Maintain consistent code style
 3. Update styles.css for UI changes
