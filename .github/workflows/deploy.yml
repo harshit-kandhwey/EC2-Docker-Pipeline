@@ -46,7 +46,7 @@ jobs:
               git pull origin main
             else
               echo "Cloning repository..."
-              git clone ${{ secrets.GITHUB_REPO }} .
+              git clone ${{ secrets.GIT_REPO }} .
             fi
             
             # Stop existing containers
